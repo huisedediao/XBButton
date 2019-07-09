@@ -440,9 +440,7 @@
 {
     if (self.bl_click)
     {
-        typeof(self) __weak weakSelf = self;
-        XBActionBlock block = [self.bl_click copy];
-        block(weakSelf);
+        self.bl_click(self);
     }
     else
     {
