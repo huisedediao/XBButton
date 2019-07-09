@@ -42,7 +42,7 @@ typedef enum : NSUInteger {
 
 @class XBButton;
 
-typedef void(^XBActionBlock)(XBButton *weakBtn);
+typedef void(^XBActionBlock)(XBButton *btn);
 
 @interface XBButton : UIControl
 
