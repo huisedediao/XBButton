@@ -24,7 +24,10 @@ Pod::Spec.new do |spec|
   #   * Try to keep it short, snappy and to the point.
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
-  spec.description  = "便于同时展示图片和文字的情景，支持图片在左、图片在右、图片在上、图片在下模式，支持内容（图片和文字）居中、上、下、左、右对齐，支持设置内容到对齐边的间距，支持设置图文间距"
+  spec.description  = <<-DESC
+                          便于同时展示图片和文字的情景，支持图片在左、图片在右、图片在上、图片在下模式，支持内容（图片和文字）居中、上、下、左、右对齐，支持设置内容到对齐边的间距，支持设置图文间距
+                      DESC
+  # spec.description  = "便于同时展示图片和文字的情景，支持图片在左、图片在右、图片在上、图片在下模式，支持内容（图片和文字）居中、上、下、左、右对齐，支持设置内容到对齐边的间距，支持设置图文间距"
 
   spec.homepage     = "https://github.com/huisedediao/XBButton"
   # spec.screenshots  = "www.example.com/screenshots_1.gif", "www.example.com/screenshots_2.gif"
