@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "XBButton"
-  spec.version      = "0.0.1"
+  spec.version      = "0.0.2"
   spec.summary      = "自定义button，比UIButton更加方便"
 
   # This description is used to generate tags and improve search results.
