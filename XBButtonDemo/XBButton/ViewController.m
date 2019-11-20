@@ -22,12 +22,12 @@
     // Do any additional setup after loading the view, typically from a nib.
     
 
-//    [self createButton1];
+    [self createButton1];
     
 //    [self createButton2];
     
 //    [self createButton3];
-    [self createButton4];
+//    [self createButton4];
 }
 
 - (void)createButton1
@@ -40,12 +40,10 @@
     //    btn.str_titleNormal = @"testBtn";
     //    btn.enum_contentAlign = XBBtnAlignBottom;
     //    btn.f_spaceOfContentAndBorderForAlign = 15;
-    btn.f_spaceOfContentAndBorderForAdapt = 3;
+    btn.f_verticallySpaceForAdapt = 15;
+    btn.f_horizontalSpaceForAdapt = 30;
     btn.b_multiLine = YES;
     btn.str_titleAttributedNormal = [[NSAttributedString alloc] initWithString:@"testBtn.lkdkfjeifeiefij"];
-    btn.bl_click = ^(XBButton *weakBtn) {
-        NSLog(@"btnClick");
-    };
     //    btn.lb_title.backgroundColor = [UIColor orangeColor];
     //    btn.lb_title.superview.backgroundColor = [UIColor greenColor];
     btn.backgroundColor = [UIColor redColor];

@@ -604,10 +604,10 @@
         if (self.enum_contentAlign == XBBtnAlignCenter)
         {
             [self.v_content mas_updateConstraints:^(MASConstraintMaker *make) {
-                make.left.greaterThanOrEqualTo(self).offset(self.f_spaceOfContentAndBorderForAdapt);
-                make.right.lessThanOrEqualTo(self).offset(- self.f_spaceOfContentAndBorderForAdapt);
-                make.top.greaterThanOrEqualTo(self).offset(self.f_spaceOfContentAndBorderForAdapt);
-                make.bottom.lessThanOrEqualTo(self).offset(- self.f_spaceOfContentAndBorderForAdapt);
+                make.left.greaterThanOrEqualTo(self).offset(self.f_horizontalSpaceForAdapt);
+                make.right.lessThanOrEqualTo(self).offset(- self.f_horizontalSpaceForAdapt);
+                make.top.greaterThanOrEqualTo(self).offset(self.f_verticallySpaceForAdapt);
+                make.bottom.lessThanOrEqualTo(self).offset(- self.f_verticallySpaceForAdapt);
             }];
         }
     }

@@ -61,13 +61,18 @@ typedef void(^XBActionBlock)(XBButton *btn);
 
 ///是否保持图片比例
 @property (nonatomic,assign) BOOL b_keepImageScale;
+
 ///文字是否自动换行
 @property (nonatomic,assign) BOOL b_multiLine;
+
 ///自适应内容宽高,默认自适应(只在XBBtnAlignCenter时生效)
 @property (nonatomic,assign) BOOL b_adaptContent;
 
-///自适应内容宽高时，内容距离边缘的距离，默认为0
-@property (nonatomic,assign) CGFloat f_spaceOfContentAndBorderForAdapt;
+///自适应内容宽高时，内容的水平方向距离边缘的距离，默认为0
+@property (nonatomic,assign) CGFloat f_horizontalSpaceForAdapt;
+
+///自适应内容宽高时，内容的竖直方向距离边缘的距离，默认为0
+@property (nonatomic,assign) CGFloat f_verticallySpaceForAdapt;
 
 /** 图片和文字的间距 */
 @property (nonatomic,assign) CGFloat f_spaceOfImageAndTitle;
@@ -75,6 +80,7 @@ typedef void(^XBActionBlock)(XBButton *btn);
 /** 内容（图片和文字）到对齐方向边缘的距离，内容在中间时不起作用 */
 @property (nonatomic,assign) CGFloat f_spaceOfContentAndBorderForAlign;
 
+/** 图片的显示大小，默认未设置（图片的实际大小） */
 @property (nonatomic,assign) CGSize size_image;
 
 @property (nonatomic,strong) UIImage *img_normal;
