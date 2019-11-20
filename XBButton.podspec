@@ -16,7 +16,7 @@ Pod::Spec.new do |spec|
   #
 
   spec.name         = "XBButton"
-  spec.version      = "0.0.4"
+  spec.version      = "0.0.5"
   spec.summary      = "自定义button，比UIButton更加方便"
 
   # This description is used to generate tags and improve search results.
@@ -25,7 +25,7 @@ Pod::Spec.new do |spec|
   #   * Write the description between the DESC delimiters below.
   #   * Finally, don't worry about the indent, CocoaPods strips it!
   spec.description  = <<-DESC
-                          便于同时展示图片和文字的情景，支持图片在左、图片在右、图片在上、图片在下模式，支持内容（图片和文字）居中、上、下、左、右对齐，支持设置内容到对齐边的间距，支持设置图文间距
+                          便于同时展示图片和文字的情景，支持图片在左、图片在右、图片在上、图片在下模式，支持内容（图片和文字）居中、上、下、左、右对齐，支持设置内容到对齐边的间距，支持设置图文间距，支持自适应宽高
                       DESC
   # spec.description  = "便于同时展示图片和文字的情景，支持图片在左、图片在右、图片在上、图片在下模式，支持内容（图片和文字）居中、上、下、左、右对齐，支持设置内容到对齐边的间距，支持设置图文间距"
 
