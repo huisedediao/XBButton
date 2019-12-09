@@ -52,8 +52,18 @@
     btn.color_backgroundSelected = [UIColor purpleColor];
     btn.bl_click = ^(XBButton *weakBtn) {
         weakBtn.selected = !weakBtn.selected;
+        NSLog(@"1");
     };
+    btn.bl_click = ^(XBButton *weakBtn) {
+        weakBtn.selected = !weakBtn.selected;
+        NSLog(@"2");
+    };
+    [btn addTarget:self action:@selector(testSelector) forControlEvents:UIControlEventTouchUpInside];
     btn.img_normal = [UIImage imageNamed:@"testImg"];
+}
+- (void)testSelector
+{
+    NSLog(@"testSelector");
 }
 
 - (void)createButton2

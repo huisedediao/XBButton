@@ -46,9 +46,9 @@ typedef void(^XBActionBlock)(XBButton *btn);
 
 @interface XBButton : UIControl
 
-@property (nonatomic,strong) UILabel *lb_title;
-@property (nonatomic,strong) UIImageView *imgv_image;
-@property (nonatomic,strong) UIImageView *imgv_background;
+@property (nonatomic,readonly,strong) UILabel *lb_title;
+@property (nonatomic,readonly,strong) UIImageView *imgv_image;
+@property (nonatomic,readonly,strong) UIImageView *imgv_background;
 
 /** 图片和文字排布样式 ，默认图片在左*/
 @property (nonatomic,assign) XBBtnContentType enum_contentType;

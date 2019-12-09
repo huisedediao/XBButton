@@ -12,18 +12,27 @@
 
 @interface XBButton ()
 @property (nonatomic,strong) UIView *v_content;
+@property (nonatomic,assign) BOOL needInitFrame;
 @end
 
 @implementation XBButton
+@synthesize lb_title = _lb_title;
+@synthesize imgv_image = _imgv_image;
+@synthesize imgv_background = _imgv_background;
 
 - (void)layoutSubviews
 {
-    //解决没有设置宽高的时候无法显示的问题
-    if (self.frame.size.width == 0 || self.frame.size.height == 0)
+    [super layoutSubviews];
+    
+    if (self.needInitFrame == YES)
     {
-        self.frame = CGRectMake(0, 0, 1, 1);
+        if (self.frame.size.width == 0 || self.frame.size.height == 0)
+        {
+            self.frame = CGRectMake(0, 0, 1, 1);
+            [self setNeedsDisplay];
+        }
+        self.needInitFrame = NO;
     }
-    [self setNeedsDisplay];
 }
 
 #pragma mark - 生命周期
@@ -35,6 +44,7 @@
     }
     return self;
 }
+
 -(instancetype)initWithCoder:(NSCoder *)aDecoder
 {
     if (self = [super initWithCoder:aDecoder])
@@ -77,6 +87,7 @@
     [self setHighLightOrSelectedBackgroundColorIfNeed:rect];
     [self sendBGImageViewToBackIfNeed];
 }
+
 - (void)dealloc
 {
     NSLog(@"%@销毁",NSStringFromClass([self class]));
@@ -92,10 +103,16 @@
 #pragma mark - 初始化
 - (void)initParams
 {
+    self.needInitFrame = YES;
     self.b_adaptContent = YES;
     self.layer.masksToBounds = YES;
-    [self addTarget:self action:@selector(selfClick) forControlEvents:UIControlEventTouchUpInside];
+    self.backgroundColor = [UIColor clearColor];
     
+    [self addObserver];
+}
+
+- (void)addObserver
+{
     unsigned int count;
     Ivar *ivarList = class_copyIvarList([self class], &count);
     for (int i = 0; i < count; i++)
@@ -103,7 +120,6 @@
         NSString *keyPath = [NSString stringWithUTF8String:ivar_getName(ivarList[i])];
         [self addObserver:self forKeyPath:[keyPath substringFromIndex:1] options:NSKeyValueObservingOptionNew context:nil];
     }
-    self.backgroundColor = [UIColor clearColor];
 }
 
 #pragma mark - 观察者回调
@@ -269,6 +285,7 @@
         }
     }
 }
+
 - (void)sendBGImageViewToBackIfNeed
 {
     if (_imgv_background)
@@ -276,7 +293,6 @@
         [self sendSubviewToBack:_imgv_background];
     }
 }
-
 
 #pragma mark - 获取用于显示的属性
 - (UIImage *)getImage
@@ -304,6 +320,7 @@
     }
     return self.img_normal;
 }
+
 - (NSString *)getTitle
 {
     if (self.isEnabled == NO)
@@ -329,6 +346,7 @@
     }
     return self.str_titleNormal;
 }
+
 - (UIColor *)getTitleColor
 {
     if (self.isEnabled == NO)
@@ -354,6 +372,7 @@
     }
     return self.color_titleNormal;
 }
+
 - (UIImage *)getBackgroundImage
 {
     if (self.isEnabled == NO)
@@ -428,42 +447,25 @@
     [super setHighlighted:highlighted];
     [self setNeedsDisplay];
 }
+
 - (void)setSelected:(BOOL)selected
 {
     [super setSelected:selected];
     [self setNeedsLayout];
 }
 
+- (void)setBl_click:(XBActionBlock)bl_click
+{
+    _bl_click = bl_click;
+    [self addTarget:self action:@selector(selfClick) forControlEvents:UIControlEventTouchUpInside];
+}
+
 #pragma mark - 点击事件
--(void)selfClick{}
--(void)sendAction:(SEL)action to:(id)target forEvent:(UIEvent *)event
+- (void)selfClick
 {
     if (self.bl_click)
     {
         self.bl_click(self);
-    }
-    else
-    {
-        [super sendAction:action to:target forEvent:event];
-    }
-}
--(void)addTarget:(id)target action:(SEL)action forControlEvents:(UIControlEvents)controlEvents
-{
-    if (target == self)
-    {
-        if ([self actionsForTarget:self forControlEvent:controlEvents])
-        {
-            return;
-        }
-        [super addTarget:target action:action forControlEvents:controlEvents];
-    }
-    else
-    {
-        if ([self actionsForTarget:self forControlEvent:controlEvents])
-        {
-            [self removeTarget:self action:action forControlEvents:controlEvents];
-        }
-        [super addTarget:target action:action forControlEvents:controlEvents];
     }
 }
 
@@ -476,6 +478,7 @@
         make.center.equalTo(self.v_content);
     }];
 }
+
 - (void)setImageViewLayoutForNonTitle
 {
     [self.imgv_image mas_remakeConstraints:^(MASConstraintMaker *make) {
@@ -526,12 +529,14 @@
             break;
     }
 }
+
 - (void)clearContentViewLayout
 {
     [self.v_content mas_remakeConstraints:^(MASConstraintMaker *make) {
         
     }];
 }
+
 - (void)setContentLayout
 {
     switch (self.enum_contentAlign)
@@ -597,6 +602,7 @@
             break;
     }
 }
+
 - (void)setContentAdaptLayoutIfNeed
 {
     if (self.b_adaptContent)
@@ -612,6 +618,7 @@
         }
     }
 }
+
 - (void)contentSubviewsLayoutForType_left
 {
     if (self.enum_contentAlign == XBBtnAlignEachSide)
@@ -648,6 +655,7 @@
         make.right.lessThanOrEqualTo(self.v_content);
     }];
 }
+
 - (void)contentSubviewsLayoutForType_right
 {
     if (self.enum_contentAlign == XBBtnAlignEachSide)
@@ -684,6 +692,7 @@
         make.right.lessThanOrEqualTo(self.v_content);
     }];
 }
+
 - (void)contentSubviewsLayoutForType_top
 {
     if (self.enum_contentAlign == XBBtnAlignEachSide)
@@ -720,6 +729,7 @@
         make.bottom.lessThanOrEqualTo(self.v_content);
     }];
 }
+
 - (void)contentSubviewsLayoutForType_bottom
 {
     if (self.enum_contentAlign == XBBtnAlignEachSide)
@@ -757,7 +767,6 @@
     }];
 }
 
-
 #pragma mark - 懒加载
 - (UIImageView *)imgv_background
 {
@@ -772,6 +781,7 @@
     }
     return _imgv_background;
 }
+
 - (UIView *)v_content
 {
     if (_v_content == nil)
@@ -782,6 +792,7 @@
     }
     return _v_content;
 }
+
 - (UILabel *)lb_title
 {
     if (_lb_title == nil)
@@ -790,6 +801,7 @@
     }
     return _lb_title;
 }
+
 - (UIImageView *)imgv_image
 {
     if (_imgv_image == nil)
@@ -798,14 +810,18 @@
     }
     return _imgv_image;
 }
+
+#pragma mark - 其他方法
 - (void)createTitleLabel
 {
     _lb_title = [UILabel new];
     [self.v_content addSubview:_lb_title];
 }
+
 - (void)createImageView
 {
     _imgv_image = [UIImageView new];
     [self.v_content addSubview:_imgv_image];
 }
+
 @end

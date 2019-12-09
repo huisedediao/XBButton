@@ -226,10 +226,10 @@
 		F144EFCC22D4302A000B93FA /* XBButton */ = {
 			isa = PBXGroup;
 			children = (
-				F144EFCD22D4302A000B93FA /* XBButton+CompatibleUIButton.m */,
+				F144EFD022D4302A000B93FA /* XBButton.h */,
 				F144EFCE22D4302A000B93FA /* XBButton.m */,
 				F144EFCF22D4302A000B93FA /* XBButton+CompatibleUIButton.h */,
-				F144EFD022D4302A000B93FA /* XBButton.h */,
+				F144EFCD22D4302A000B93FA /* XBButton+CompatibleUIButton.m */,
 			);
 			name = XBButton;
 			path = ../../XBButton;
